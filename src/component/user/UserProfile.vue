@@ -1,5 +1,7 @@
 <template>
     <div>
-        INFO PAGE
+        
+        User Profile
+    
     </div>
 </template>
