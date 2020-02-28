@@ -2,7 +2,7 @@
   "name": "ufit",
   "description": "A Vue.js project",
   "version": "1.0.0",
-  "author": "Eric Tondelli <e.tondelli@loccioni.com>",
+  "author": "Eric Tondelli <e.tondelli@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -10,6 +10,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.5.0",
     "html2canvas": "^1.0.0-rc.5",
     "jspdf": "^1.5.3",
     "vue": "^2.5.11",

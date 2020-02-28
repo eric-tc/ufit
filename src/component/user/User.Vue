@@ -1,6 +1,6 @@
 <template>
     <div>
-        User root
+        User Root
 
         <router-view></router-view>
     </div>
