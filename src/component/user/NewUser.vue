@@ -168,6 +168,8 @@
 </template>
 
 <script>
+
+import axios from 'axios'
   export default {
     data() {
       return {
@@ -194,8 +196,19 @@
     },
     methods: {
       onSubmit(evt) {
+
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
+
+        const path = 'http://localhost:4000/new-client';
+        
+        axios.post(path, this.form).then(()=>{
+
+            console.log("utente aggiunto");
+
+        })
+
+
+        //alert(JSON.stringify(this.form))
       },
       onReset(evt) {
         evt.preventDefault()
