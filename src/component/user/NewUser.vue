@@ -30,8 +30,10 @@
     <b-form-group id="input-group-3" label="Numero Telefono:" label-for="input-3">
         <b-form-input
           id="input-3"
+          onkeydown="return event.keyCode !== 69"
           v-model="form.cellulare"
           required
+          type="number"
           placeholder="Numero Telefono"
         ></b-form-input>
       </b-form-group>
@@ -223,6 +225,6 @@ import axios from 'axios'
           this.show = true
         })
       }
-    }
+    },
   }
 </script>
