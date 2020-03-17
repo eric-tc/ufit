@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div id="div_canva" class="row">
     
     <div class="col-12" ref="scheda">
     
@@ -69,17 +69,22 @@
     
     <h2 class="inline-block pull-left"> <b>PARTE CENTRALE</b></h2>
     
-    <button class="btn btn-primary ml-4" data-html2canvas-ignore="true" @click="addCircuito()">ADD CIRCUITO</button>
+    <button class="btn btn-primary ml-4" data-html2canvas-ignore="true" @click="addAllenamento()">ADD ALLENAMENTO</button>
     <hr data-html2canvas-ignore="true">
     
+    <div style="border-style: solid; border-color: coral;" v-for="(allenamento,n_all) in allenamenti_circuito">
     
     
-    <div style="border-style: solid; border-color: coral;" v-for="(circuito,numero) in allenamenti_circuito">
-      <br>
-      <h3>  CIRCUITO {{numero}}   </h3>
+	<h2 class="inline-block pull-left">ALLENAMENTO {{n_all}}</h2>
+	<button class="btn btn-info ml-4" data-html2canvas-ignore="true" @click="addCircuito(n_all)">ADD CIRCUITO</button>
+   
+
+    <div  v-for="(circuito,numero) in allenamento">
+        <br>
+        <h3>  CIRCUITO {{numero}}   </h3>
       
     
-    <button class="btn btn-primary ml-4" data-html2canvas-ignore="true" @click="addCircuitoAllenamento(numero)">ADD ESERCIZIO</button>
+    <button class="btn btn-secondary ml-4" data-html2canvas-ignore="true" @click="addCircuitoAllenamento(n_all,numero)">ADD ESERCIZIO</button>
     <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
@@ -89,7 +94,7 @@
           </tr>
         </thead>
 
-        <draggable v-model="allenamenti_circuito[numero]" tag="tbody">
+        <draggable v-model="allenamenti_circuito[n_all][numero]" tag="tbody">
         
           <tr v-for=" (item, index )   in circuito" :key="item.name">
 
@@ -104,7 +109,7 @@
 
                 
                 <div v-show = "item.edit == true" v-on:blur= "item.edit=false; $emit('update')"
-                @keyup.enter = "item.edit=false; $emit('update'); updateCompCentrale(numero,index)">
+                @keyup.enter = "item.edit=false; $emit('update'); updateCompCentrale(n_all,numero,index)">
                     <model-list-select :list="listaAllenamenti"
                      v-model="test"
                      
@@ -119,14 +124,13 @@
             </td>
             <td>{{ item.name }} {{index}}</td>
             <td>{{ item.sport }}</td>
-            <td><button  @click="removeCircuitoAllenamento(numero,index)" class="btn btn-danger" data-html2canvas-ignore="true">Remove</button></td>
+            <td><button  @click="removeCircuitoAllenamento(n_all,numero,index)" class="btn btn-danger" data-html2canvas-ignore="true">Remove</button></td>
           </tr>
         </draggable>
       </table>
       
-
     </div>
-
+  	</div>
         <br>
         <br>
       <h2> <b> DEFATICAMENTO </b></h2>
@@ -196,7 +200,7 @@ export default {
               nome_allenamento:""
         },
 
-      allenamenti_circuito:[[{id_allenamento:"add",nome_allenamento:"test",sport:"",edit:true }]],
+      allenamenti_circuito:[[[{id_allenamento:"add",nome_allenamento:"test",sport:"",edit:true }]]],
       index:"",
       defaticamento:[{id: 1, name: "Esempio", sport: "Add", 'edit':true}],
       edited:null,
@@ -223,21 +227,27 @@ export default {
         this.list.splice(index,1);
     },
 
-    addCircuito:function(){
+    addCircuito:function(n_all){
 
 
-        this.allenamenti_circuito.push([{id:"add",name:"add",sport:"add",edit:true}])
+        this.allenamenti_circuito[n_all].push([{id:"add",name:"add",sport:"add",edit:true}])
     },
 
-    addCircuitoAllenamento:function(index){
+    addAllenamento(){
 
+        this.allenamenti_circuito.push([])
 
-        this.allenamenti_circuito[index].push({id_allenamento:"add",nome_allenamento:"add",sport:"add",edit:true})
     },
 
-    removeCircuitoAllenamento:function(numero,index){
+    addCircuitoAllenamento:function(n_all,index){
 
-        this.allenamenti_circuito[numero].splice(index,1);
+
+        this.allenamenti_circuito[n_all][index].push({id_allenamento:"add",nome_allenamento:"add",sport:"add",edit:true})
+    },
+
+    removeCircuitoAllenamento:function(n_all,numero,index){
+
+        this.allenamenti_circuito[n_all][numero].splice(index,1);
     },
 
     addDefaticamento:function(){
@@ -251,7 +261,8 @@ export default {
 
 
     },
-    
+	
+	//funzione per gestire solo allenamento e post allenamento
     updateComp(list,index){
 
       console.log(index);
@@ -260,17 +271,18 @@ export default {
     
     },
 
-    updateCompCentrale(numero,index){
+	//funzione per gestire campo select nome allenamento parte centrale
+    updateCompCentrale(n_all,numero,index){
 
-      console.log("UPDATE COM CENTRALE");
-      console.log(numero);
-      console.log(index)
+    //   console.log("UPDATE COM CENTRALE");
+    //   console.log(numero);
+    //   console.log(index)
 
-      console.log(this.allenamenti_circuito[numero][index].id_allenamento);
-      console.log(this.test.id_allenamento);
+    //   console.log(this.allenamenti_circuito[n_all][numero][index].id_allenamento);
+    //   console.log(this.test.id_allenamento);
 
-      this.allenamenti_circuito[numero][index].id_allenamento=this.test.id_allenamento;
-      this.allenamenti_circuito[numero][index].nome_allenamento=this.test.nome_allenamento;
+      this.allenamenti_circuito[n_all][numero][index].id_allenamento=this.test.id_allenamento;
+      this.allenamenti_circuito[n_all][numero][index].nome_allenamento=this.test.nome_allenamento;
       
       console.log("UPDATED")
       //console.log(this.allenamenti_circuito[0][0].id_allenamento);
@@ -279,7 +291,7 @@ export default {
 
     },
 
-    generatePdf:function(){
+generatePdf:function(){
 
         
    /** WITH CSS 
@@ -298,19 +310,25 @@ export default {
 */
 
 console.log("test");
-html2canvas(document.body).then(canvas => {
+/*html2canvas(document.body).then(canvas => {
               
 
                   console.log("prova");
 
                   //Returns the image data URL, parameter: image format and clarity (0-1)
                   var pageData = canvas.toDataURL('image/jpeg', 1.0);
+				  console.log("CANVA COORD");
+				  console.log(canvas.height);
+				  console.log(canvas.width);
 
-                  //Default vertical direction, size ponits, format a4[595.28,841.89]
-                  var pdf = new jsPDF('', 'pt', 'a4');
+				  //Default vertical direction, size ponits, format a4[595.28,841.89]
+				  //il pdf diventa delle dimensione del canvas
+                  var pdf = new jsPDF('', 'pt', [canvas.width,canvas.height]);
 
                   //Two parameters after addImage control the size of the added image, where the page height is compressed according to the width-height ratio column of a4 paper.
-                  pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
+                  //pdf.addImage(pageData, 'JPEG', 0, 0, 1000, 1000/canvas.width*canvas.height );
+				  
+				  pdf.addImage(pageData, 'JPEG', 0, 0, canvas.height,canvas.width );
 
                   pdf.save('stone.pdf');
 
@@ -318,7 +336,24 @@ html2canvas(document.body).then(canvas => {
           );
 
 
+*/
 
+
+var divHeight = $('#div_canva').height();
+var divWidth = $('#div_canva').width();
+var ratio = divHeight / divWidth;
+var doc = new jsPDF("","mm",[divWidth,divHeight]);
+html2canvas(document.getElementById("div_canva")).then(canvas=> {
+		  
+		  var image = canvas.toDataURL("image/jpeg");
+           // using defaults: orientation=portrait, unit=mm, size=A4
+          var width = doc.internal.pageSize.getWidth();    
+          var height = doc.internal.pageSize.getHeight();
+          height = ratio * width;
+          doc.addImage(image, 'JPEG', 0, 0, width-20, height-10);
+          doc.save('myPage.pdf'); //Download the rendered PDF.
+     }
+);
 
     },
 
@@ -439,12 +474,21 @@ created() {
   vertical-align: top;
 }
 
+div {
+
+margin-top:0.2em;
+
+}
+
 h2,h3 {
 
 display: inline-block;
 float: left;
 
 }
-.html2canvas-container { width: 3000px !important; height: 3000px !important; }
+/*
+Se non visualizzo tutta la scheda devo aumentare la height 
+*/ 
+.html2canvas-container { width: auto !important; height: auto !important; }
 
 </style>
