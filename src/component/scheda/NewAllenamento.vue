@@ -359,7 +359,7 @@
               <div
                 v-show="item.edit == true"
                 v-on:blur="item.edit=false; $emit('update')"
-                @keyup.enter="item.edit=false; $emit('update'); updateComp(list,index)"
+                @keyup.enter="item.edit=false; $emit('update'); updateCompDefaticamento(list,index)"
               >
                 <model-list-select
                   :list="listaAllenamenti"
@@ -641,6 +641,13 @@ export default {
       this.list[index].id_allenamento = this.test.id_allenamento;
     },
 
+    updateCompDefaticamento(list,index){
+        
+      this.defaticamento[index].nome_allenamento = this.test.nome_allenamento;
+      this.defaticamento[index].id_allenamento = this.test.id_allenamento;
+
+    },
+
     //funzione per gestire campo select nome allenamento parte centrale
     updateCompCentrale(n_all, numero, index) {
       //   console.log("UPDATE COM CENTRALE");
@@ -832,10 +839,10 @@ export default {
   beforeCreate() {
     //verifica se la data e stata inserita correttamente altrimenti ritorna alla pagina scheda
 
-    if (this.$route.params.form.fineScheda == "undefined") {
+    if (this.$route.params.form.fineScheda == "undefined" || this.$route.params.form.programmazioneScheda == "undefined" || this.$route.params.form.tipoCarico == "undefined") {
       this.$router.push({ name: "newScheda" });
     } else {
-      if (this.$route.params.form.fineScheda === null) {
+      if (this.$route.params.form.fineScheda === null ) {
         //redirect
         console.log("NULL");
         this.$router.push({ name: "newScheda", params: { errors: true } });

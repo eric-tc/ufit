@@ -39,13 +39,7 @@
         <b-form-select id="input-4" v-model="form.stileVita" :options="stileVitaOpzioni" required></b-form-select>
       </b-form-group>
 
-      <b-form-group id="input-group-4">
-        <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
-
+     
       <h2>MOTIVO DELLA RICHIESTA</h2>
 
       <b-form-group id="input-group-5" label="Motivo Richiesta:" label-for="input-5">
@@ -229,7 +223,7 @@ export default {
    localStorage.setItem("formUtente", JSON.stringify(this.form));
    next();
 
-   
+
 },
 mounted() {
     console.log();
