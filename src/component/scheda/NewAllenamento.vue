@@ -19,11 +19,13 @@
           data-html2canvas-ignore="true"
           @click="addRiscaldamento()"
         >ADD ESERCIZIO</button>
+        <button class="btn btn-info ml-4" data-html2canvas-ignore="true" @click="generatePdf()">CREA PDF</button>
+
         <button
           class="btn btn-success ml-4"
           data-html2canvas-ignore="true"
-          @click="generatePdf()"
-        >CREA PDF</button>
+          @click="save()"
+        >SALVA</button>
       </div>
       <hr data-html2canvas-ignore="true" />
       <br />
@@ -69,11 +71,11 @@
             <td>
               <div v-show="item.serie_edit == false">
                 <div v-show="item.serie===''">
-                  <label @dblclick="item.workout_edit = true"> aggiungi </label>
+                  <label @dblclick="item.workout_edit = true">aggiungi</label>
                 </div>
 
                 <div v-show="item.serie!==''">
-                <label @dblclick="item.serie_edit = true">{{ item.serie }}</label>
+                  <label @dblclick="item.serie_edit = true">{{ item.serie }}</label>
                 </div>
               </div>
 
@@ -125,11 +127,11 @@
             <td>
               <div v-show="item.note_edit == false">
                 <div v-show="item.note===''">
-                  <label @dblclick="item.workout_edit = true"> aggiungi </label>
+                  <label @dblclick="item.workout_edit = true">aggiungi</label>
                 </div>
 
                 <div v-show="item.note!==''">
-                <label @dblclick="item.note_edit = true">{{ item.note }}</label>
+                  <label @dblclick="item.note_edit = true">{{ item.note }}</label>
                 </div>
               </div>
 
@@ -235,79 +237,79 @@
                 </td>
 
                 <td>
-              <div v-show="item.serie_edit == false">
-                <div v-show="item.serie===''">
-                  <label @dblclick="item.workout_edit = true"> aggiungi </label>
-                </div>
+                  <div v-show="item.serie_edit == false">
+                    <div v-show="item.serie===''">
+                      <label @dblclick="item.workout_edit = true">aggiungi</label>
+                    </div>
 
-                <div v-show="item.serie!==''">
-                <label @dblclick="item.serie_edit = true">{{ item.serie }}</label>
-                </div>
-              </div>
+                    <div v-show="item.serie!==''">
+                      <label @dblclick="item.serie_edit = true">{{ item.serie }}</label>
+                    </div>
+                  </div>
 
-              <input
-                v-show="item.serie_edit == true"
-                v-model="item.serie"
-                v-on:blur="item.serie_edit=false; $emit('update')"
-                @keyup.enter="item.serie_edit=false; $emit('update')"
-              />
-            </td>
+                  <input
+                    v-show="item.serie_edit == true"
+                    v-model="item.serie"
+                    v-on:blur="item.serie_edit=false; $emit('update')"
+                    @keyup.enter="item.serie_edit=false; $emit('update')"
+                  />
+                </td>
 
-            <td>
-              <div v-show="item.workout_edit == false">
-                <div v-show="item.workout===''">
-                  <label @dblclick="item.workout_edit = true">aggiungi</label>
-                </div>
+                <td>
+                  <div v-show="item.workout_edit == false">
+                    <div v-show="item.workout===''">
+                      <label @dblclick="item.workout_edit = true">aggiungi</label>
+                    </div>
 
-                <div v-show="item.workout!==''">
-                  <label @dblclick="item.workout_edit = true">{{ item.workout }}</label>
-                </div>
-              </div>
+                    <div v-show="item.workout!==''">
+                      <label @dblclick="item.workout_edit = true">{{ item.workout }}</label>
+                    </div>
+                  </div>
 
-              <input
-                v-show="item.workout_edit == true"
-                v-model="item.workout"
-                v-on:blur="item.workout_edit=false; $emit('update')"
-                @keyup.enter="item.workout_edit=false; $emit('update')"
-              />
-            </td>
+                  <input
+                    v-show="item.workout_edit == true"
+                    v-model="item.workout"
+                    v-on:blur="item.workout_edit=false; $emit('update')"
+                    @keyup.enter="item.workout_edit=false; $emit('update')"
+                  />
+                </td>
 
-            <td>
-              <div v-show="item.carico_edit == false">
-                <div v-show="item.carico===''">
-                  <label @dblclick="item.workout_edit = true">aggiungi</label>
-                </div>
+                <td>
+                  <div v-show="item.carico_edit == false">
+                    <div v-show="item.carico===''">
+                      <label @dblclick="item.workout_edit = true">aggiungi</label>
+                    </div>
 
-                <div v-show="item.carico!==''">
-                  <label @dblclick="item.carico_edit = true">{{ item.carico }}</label>
-                </div>
-              </div>
+                    <div v-show="item.carico!==''">
+                      <label @dblclick="item.carico_edit = true">{{ item.carico }}</label>
+                    </div>
+                  </div>
 
-              <input
-                v-show="item.carico_edit == true"
-                v-model="item.carico"
-                v-on:blur="item.carico_edit=false; $emit('update')"
-                @keyup.enter="item.carico_edit=false; $emit('update')"
-              />
-            </td>
-            <td>
-              <div v-show="item.note_edit == false">
-                <div v-show="item.note===''">
-                  <label @dblclick="item.workout_edit = true"> aggiungi </label>
-                </div>
+                  <input
+                    v-show="item.carico_edit == true"
+                    v-model="item.carico"
+                    v-on:blur="item.carico_edit=false; $emit('update')"
+                    @keyup.enter="item.carico_edit=false; $emit('update')"
+                  />
+                </td>
+                <td>
+                  <div v-show="item.note_edit == false">
+                    <div v-show="item.note===''">
+                      <label @dblclick="item.workout_edit = true">aggiungi</label>
+                    </div>
 
-                <div v-show="item.note!==''">
-                <label @dblclick="item.note_edit = true">{{ item.note }}</label>
-                </div>
-              </div>
+                    <div v-show="item.note!==''">
+                      <label @dblclick="item.note_edit = true">{{ item.note }}</label>
+                    </div>
+                  </div>
 
-              <input
-                v-show="item.note_edit == true"
-                v-model="item.note"
-                v-on:blur="item.note_edit=false; $emit('update')"
-                @keyup.enter="item.note_edit=false; $emit('update')"
-              />
-            </td>
+                  <input
+                    v-show="item.note_edit == true"
+                    v-model="item.note"
+                    v-on:blur="item.note_edit=false; $emit('update')"
+                    @keyup.enter="item.note_edit=false; $emit('update')"
+                  />
+                </td>
 
                 <td>
                   <button
@@ -371,11 +373,11 @@
             <td>
               <div v-show="item.serie_edit == false">
                 <div v-show="item.serie===''">
-                  <label @dblclick="item.workout_edit = true"> aggiungi </label>
+                  <label @dblclick="item.workout_edit = true">aggiungi</label>
                 </div>
 
                 <div v-show="item.serie!==''">
-                <label @dblclick="item.serie_edit = true">{{ item.serie }}</label>
+                  <label @dblclick="item.serie_edit = true">{{ item.serie }}</label>
                 </div>
               </div>
 
@@ -427,11 +429,11 @@
             <td>
               <div v-show="item.note_edit == false">
                 <div v-show="item.note===''">
-                  <label @dblclick="item.workout_edit = true"> aggiungi </label>
+                  <label @dblclick="item.workout_edit = true">aggiungi</label>
                 </div>
 
                 <div v-show="item.note!==''">
-                <label @dblclick="item.note_edit = true">{{ item.note }}</label>
+                  <label @dblclick="item.note_edit = true">{{ item.note }}</label>
                 </div>
               </div>
 
@@ -705,6 +707,18 @@ export default {
 
 
 */
+
+      localStorage.setItem("formRiscaldamento", JSON.stringify(this.list));
+      localStorage.setItem(
+        "formAllenamento",
+        JSON.stringify(this.allenamenti_circuito)
+      );
+      localStorage.setItem(
+        "formDefaticamento",
+        JSON.stringify(this.defaticamento)
+      );
+
+      //SALVA I DATI A DATABASE
       //this.sendAllenamenti();
       //Creazione del PDF
       var divHeight = $("#div_canva").height();
@@ -739,6 +753,17 @@ export default {
 
           console.log(resp.message);
           console.log("dati inseriti correttamente");
+
+          //Rimuovo gli elementi nel local Storage
+
+          if (localStorage.getItem("formRiscaldamento") !== null)
+            localStorage.removeItem("formRiscaldamento");
+
+          if (localStorage.getItem("formAllenamento") !== null)
+            localStorage.removeItem("formAllenamento");
+
+          if (localStorage.getItem("formDefaticamento") !== null)
+            localStorage.removeItem("formDefaticamento");
         })
         .catch(error => {
           // eslint-disable-next-line
@@ -788,6 +813,19 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
+    },
+
+    save() {
+
+      localStorage.setItem("formRiscaldamento", JSON.stringify(this.list));
+      localStorage.setItem(
+        "formAllenamento",
+        JSON.stringify(this.allenamenti_circuito)
+      );
+      localStorage.setItem(
+        "formDefaticamento",
+        JSON.stringify(this.defaticamento)
+      );
     }
   },
 
@@ -818,7 +856,51 @@ export default {
   },
 
   created() {
+    //prendo gli allenamenti dal database
     this.getAllenamentiList();
+
+    //carico i form
+  },
+
+  mounted() {
+    console.log("Mounted");
+
+    if (localStorage.getItem("formRiscaldamento") !== null) {
+      this.list = JSON.parse(localStorage.getItem("formRiscaldamento"));
+    }
+
+    if (localStorage.getItem("formAllenamento") !== null) {
+      this.allenamenti_circuito = JSON.parse(
+        localStorage.getItem("formAllenamento")
+      );
+    }
+
+    if (localStorage.getItem("formDefaticamento") !== null) {
+      this.defaticamento = JSON.parse(
+        localStorage.getItem("formDefaticamento")
+      );
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    // const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
+
+    // if (answer) {
+    //   next()
+    // } else {
+    //   next(false)
+    // }
+
+    //salvo i dati nel local storage prima di lasciare la pagina
+    localStorage.setItem("formRiscaldamento", JSON.stringify(this.list));
+    localStorage.setItem(
+      "formAllenamento",
+      JSON.stringify(this.allenamenti_circuito)
+    );
+    localStorage.setItem(
+      "formDefaticamento",
+      JSON.stringify(this.defaticamento)
+    );
+    next();
   },
 
   components: {

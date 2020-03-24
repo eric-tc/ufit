@@ -74,6 +74,8 @@ data(){
 
 methods: {
     onSubmit(evt) {
+
+        localStorage.setItem("formScheda", JSON.stringify(this.form));
         console.log("onSubmit");
 
     },
@@ -83,12 +85,29 @@ methods: {
 
     }
 },
+beforeRouteLeave (to, from , next) {
+  // const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
+  
+  // if (answer) {
+  //   next()
+  // } else {
+  //   next(false)
+  // }
+
+  //salvo i dati nel local storage prima di lasciare la pagina
+   localStorage.setItem("formScheda", JSON.stringify(this.form));
+   next();
+},
 
 
 
 mounted() {
     this.error=this.$route.params.errors
     this.dateError=this.$route.params.dateError;
+
+    if (localStorage.getItem("formScheda") !== null) {
+      this.form = JSON.parse(localStorage.getItem("formScheda"));
+    }
 },
 
 
