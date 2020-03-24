@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import {routes} from './routes.js'
+import { routes } from './routes.js'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 Vue.use(VueRouter);
@@ -12,9 +12,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-search-select/dist/VueSearchSelect.css'
 
 
-const router= new VueRouter({
+const router = new VueRouter({
   routes,
-  mode:'history'
+  mode: 'history'
 })
 
 
