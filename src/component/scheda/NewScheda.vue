@@ -75,7 +75,13 @@ data(){
 methods: {
     onSubmit(evt) {
 
+        this.form.idUtente=this.$route.params.id;
+        
+        console.log("IDUTENTE")
+        console.log( this.form.idUtente);
+        alert("pippo");
         localStorage.setItem("formScheda", JSON.stringify(this.form));
+
         console.log("onSubmit");
 
     },
@@ -93,7 +99,9 @@ beforeRouteLeave (to, from , next) {
   // } else {
   //   next(false)
   // }
-
+    
+    // salvo id utente nel local storage prima di passare alla creazione degli allenamenti
+    this.form.idUtente=this.$route.params.id;
   //salvo i dati nel local storage prima di lasciare la pagina
    localStorage.setItem("formScheda", JSON.stringify(this.form));
    next();
@@ -106,8 +114,8 @@ mounted() {
     this.dateError=this.$route.params.dateError;
 
     if (localStorage.getItem("formScheda") !== null) {
-      this.form = JSON.parse(localStorage.getItem("formScheda"));
-    }
+       this.form = JSON.parse(localStorage.getItem("formScheda"));
+     }
 },
 
 

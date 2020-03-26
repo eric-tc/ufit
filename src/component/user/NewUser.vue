@@ -130,11 +130,14 @@
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
+      <!-- <b-button type="reset" variant="danger">Reset</b-button>
+    </b-form>-->
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
-    </b-card>
+    </b-card> 
+    <br>
+    <br>
   </div>
 </template>
 
@@ -174,14 +177,40 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
 
+      localStorage.setItem("formUtente", JSON.stringify(this.form));
+
       const path = "http://localhost:4000/new-client";
 
       axios.post(path, this.form).then(() => {
         console.log("utente aggiunto");
         //rimuovo l'utente dal local storage se e stato aggiunto correttamente a db
-        if (localStorage.getItem("formData") !== null)
-          localStorage.removeItem("formData");
+        
+        localStorage.removeItem("formUtente");
+        this.form={
+        email: "",
+        cellulare: "",
+        name: "",
+        stileVita: null,
+        motivoRichiesta: "",
+        aiutoServizio: "",
+        aspettativaServizio: "",
+        numAllenamenti: "",
+        oreDisponibili: "",
+        allenamentoSvolto: "",
+        somatotipo: "",
+        allenamentoDesiderato: "",
+        infortunio: "",
+        malattie: "",
+        checked: []
+      }
+        this.$router.push({ name: "ListUser", params: { utenteInserito: true } });
+      
       });
+
+
+
+      
+
 
       //alert(JSON.stringify(this.form))
     },
@@ -192,6 +221,8 @@ export default {
       console.log("save");
 
       localStorage.setItem("formUtente", JSON.stringify(this.form));
+      
+      //localStorage.removeItem("formUtente");
       //this.$store.commit("updateFormUtente",this.form);
     },
 

@@ -1,5 +1,8 @@
 <template>
     <div>
+
+      <div style="background-color:green;" v-if="utente">UTENTE INSERITO CORRETTAMENTE</div>
+      <div style="background-color:green;" v-if="success">SCHEDA INSERITA CORRETTAMENTE</div>
         <ul class="list-group cProductsList"> 
                 
                 
@@ -31,7 +34,9 @@ data(){
     return{
         //users:[{id:'1',name:"Pippo"},
         //{id:'2',name:"test"}]
-        users:[]
+        users:[],
+        success:false,
+        utente:false
     }
 },
 
@@ -57,6 +62,9 @@ methods:{
     created() {
     
     this.getUserList();
+    this.success=this.$route.params.success;
+    this.utente=this.$route.params.utenteInserito;
+
   },
 
 

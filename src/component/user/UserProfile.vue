@@ -11,7 +11,7 @@
                     
                     <p class="p-0 m-0 flex-grow-1"> Scheda {{scheda.id}} FINE SCHEDA <b>{{scheda.durata}}</b></p> 
                    
-                   <router-link :to="{name:'userProfile',params:{id:scheda.id}}" tag="button" class="btn-success"> Allenamenti </router-link>  
+                   <router-link :to="{name:'resocontoSchede',params:{id:scheda.id_utente,scheda_id:scheda.id}}" tag="button" class="btn-success"> Allenamenti </router-link>  
                    
                    
                 </li>
@@ -34,7 +34,8 @@ export default {
 
         return{
 
-            listaSchede:[]
+            listaSchede:[],
+            
         }
 
     },
@@ -62,6 +63,7 @@ export default {
     created() {
         
         this.getSchedeList();
+        
     },
 }
 </script>

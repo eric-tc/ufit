@@ -5,13 +5,15 @@ import NewUser from './component/user/NewUser.vue'
 import UserProfile from './component/user/UserProfile.vue'
 import NewAllenamento from './component/scheda/NewAllenamento.vue'
 import NewScheda from './component/scheda/NewScheda.vue'
+import resocontoSchede from './component/scheda/resocontoSchede.vue'
 
 export const routes=[
 
     {path:"",component:Home},
     {path:"/user",component:User,children:[
-        {path:"/user/",component:ListUser},
+        {path:"/user/",component:ListUser,name:"ListUser"},
         {path:"/user/:id",component:UserProfile,name:"userProfile"},
+        {path:"/user/:id/schede/:scheda_id",component:resocontoSchede,name:"resocontoSchede"},
         {path:"/user/:id/crea-allenamento",component:NewAllenamento,name:"newAllenamento"},
         {path:"/user/:id/crea-scheda",component:NewScheda,props:true,name:"newScheda"},
 
