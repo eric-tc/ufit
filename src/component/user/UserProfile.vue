@@ -43,7 +43,7 @@ export default {
     methods: {
         getSchedeList(){
 
-      const path = 'http://localhost:5000/lista-schede/' + this.$route.params.id;
+      const path = 'http://'+this.$ip+'/lista-schede/' + this.$route.params.id;
 
       console.log(path);
       axios.get(path)

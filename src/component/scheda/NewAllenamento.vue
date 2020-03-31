@@ -748,7 +748,7 @@ export default {
     },
 
     sendAllenamenti() {
-      const path = "http://localhost:5000/crea-scheda/" + this.$route.params.id;
+      const path = "http://"+this.$ip+"/crea-scheda/" + this.$route.params.id;
 
       var allenamenti_totali = [];
 
@@ -808,7 +808,7 @@ export default {
 
     //ritorna la lista degli allenamenti
     getAllenamentiList() {
-      const path = "http://localhost:5000/esercizi";
+      const path = "http://"+this.$ip+"/esercizi";
       console.log("prova");
       axios
         .get(path)

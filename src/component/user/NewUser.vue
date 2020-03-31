@@ -179,7 +179,7 @@ export default {
 
       localStorage.setItem("formUtente", JSON.stringify(this.form));
 
-      const path = "http://localhost:5000/new-client";
+      const path = "http://"+ this.$ip+"/new-client";
 
       axios.post(path, this.form).then(() => {
         console.log("utente aggiunto");
