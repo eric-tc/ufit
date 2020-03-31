@@ -66,4 +66,4 @@ Cambiare strategia di Deploy Docker non supporta questo meccanismo
 
 - Ip cababilities
 
-https://unix.stackexchange.com/questions/459206/list-ip-tables-in-docker-container
+https://unix.stackexchange.com/questions/459206/list-ip-tables-in-docker-container 
