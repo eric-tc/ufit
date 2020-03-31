@@ -655,7 +655,7 @@ export default {
     },
 
     sendAllenamenti() {
-      const path = "http://localhost:4000/crea-scheda/" + this.$route.params.id;
+      const path = "http://localhost:5000/crea-scheda/" + this.$route.params.id;
 
       var allenamenti_totali = [];
 
@@ -713,7 +713,7 @@ export default {
 
     //ritorna la lista degli allenamenti
     getAllenamentiList() {
-      const path = "http://localhost:4000/esercizi";
+      const path = "http://localhost:5000/esercizi";
       console.log("prova");
       axios
         .get(path)
@@ -754,7 +754,7 @@ export default {
     fetchRiscaldamento() {
 
 
-      const path = "http://localhost:4000/lista-esercizi-riscaldamento/" + this.$route.params.id + "/" + this.$route.params.scheda_id;
+      const path = "http://localhost:5000/lista-esercizi-riscaldamento/" + this.$route.params.id + "/" + this.$route.params.scheda_id;
       console.log(path);
       axios
         .get(path)
@@ -799,7 +799,7 @@ export default {
 
     fetchAllenamenti() {
 
-        const path = "http://localhost:4000/lista-esercizi-allenamento/" + this.$route.params.id + "/" + this.$route.params.scheda_id;
+        const path = "http://localhost:5000/lista-esercizi-allenamento/" + this.$route.params.id + "/" + this.$route.params.scheda_id;
       console.log(path);
       axios
         .get(path)
@@ -847,7 +847,7 @@ export default {
     
     fetchDefaticamento() {
 
-const path = "http://localhost:4000/lista-esercizi-defaticamento/" + this.$route.params.id + "/" + this.$route.params.scheda_id;
+const path = "http://localhost:5000/lista-esercizi-defaticamento/" + this.$route.params.id + "/" + this.$route.params.scheda_id;
       console.log(path);
       axios
         .get(path)

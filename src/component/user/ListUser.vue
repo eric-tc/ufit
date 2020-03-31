@@ -43,7 +43,7 @@ data(){
 methods:{
     getUserList(){
 
-      const path = 'http://localhost:4000/';
+      const path = 'http://localhost:5000/';
       console.log("prova");
       axios.get(path)
         .then((res) => {

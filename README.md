@@ -24,3 +24,10 @@ Per eseguire il progetto su Windows eseguire
 
 VUE
 docker run -it -v C:\Users\tondelli\Desktop\2020\test\ufit:/front -v /front/node_modules -p 0.0.0.0:8080:8080 -p 0.0.0.0:5000:5000 -e CHOKIDAR_USEPOLLING=true off-front
+
+# DOCKER
+NGINX
+nginx -s reload
+
+ADD RC-SERVICE 
+apk add openrc

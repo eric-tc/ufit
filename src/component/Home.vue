@@ -23,7 +23,7 @@ data(){
 
   methods: {
     getMessage() {
-      const path = 'http://127.0.0.1:4000/test';
+      const path = 'http://127.0.0.1:5000/test';
       axios.get(path)
         .then((res) => {
           this.msg = res.data;
