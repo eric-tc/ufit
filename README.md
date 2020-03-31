@@ -31,3 +31,39 @@ nginx -s reload
 
 ADD RC-SERVICE 
 apk add openrc
+
+Docker container ip
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+
+# LINK 
+
+Vue-Nginx 
+
+https://www.freecodecamp.org/news/vuejs-pwa-on-nginx-22360ee7a7bf/
+
+Docker-Vue
+
+https://mherman.org/blog/dockerizing-a-vue-app/
+
+Simple Nginx
+
+https://medium.com/@thucnc/deploy-a-vuejs-web-app-with-nginx-on-ubuntu-18-04-f93860219030
+
+Nginx-Vue
+
+https://stackabuse.com/single-page-apps-with-vue-js-and-flask-deployment/#settingupnginx
+
+
+# ERROR
+
+Docker
+- System has not been booted with systemd as init system
+
+COSA FARE
+
+Cambiare strategia di Deploy Docker non supporta questo meccanismo
+
+- Ip cababilities
+
+https://unix.stackexchange.com/questions/459206/list-ip-tables-in-docker-container
